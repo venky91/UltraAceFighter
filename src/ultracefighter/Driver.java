@@ -10,7 +10,7 @@ public class Driver extends Applet implements Runnable, KeyListener {
 
 	@Override
 	public void init() {
-		setSize(800, 480);
+		setSize(800, 600);
 		setBackground(Color.BLACK);
 		setFocusable(true);
 		
@@ -21,7 +21,9 @@ public class Driver extends Applet implements Runnable, KeyListener {
 	
 	@Override
 	public void start() {
-		// TODO Auto-generated method stub
+		
+		Thread thread = new Thread();
+		thread.start();
 		
 	}
 	
