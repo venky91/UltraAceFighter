@@ -8,6 +8,9 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.net.URL;
+import java.util.ArrayList;
+
+
 
 public class Driver extends Applet implements Runnable, KeyListener {
 
@@ -62,6 +65,17 @@ public class Driver extends Applet implements Runnable, KeyListener {
 		while (true) {
 			plane.update();
 
+			ArrayList projectiles = plane.getProjectiles();
+			for (int i = 0; i < projectiles.size(); i++) {
+
+				Projectile p = (Projectile) projectiles.get(i);
+				if (p.isVisible() == true) {
+					p.update();
+				} else {
+					projectiles.remove(i);
+				}
+			}
+
 			repaint();
 
 			try {
@@ -92,6 +106,14 @@ public class Driver extends Applet implements Runnable, KeyListener {
 
 	@Override
 	public void paint(Graphics g) {
+
+		ArrayList projectiles = plane.getProjectiles();
+		for (int i = 0; i < projectiles.size(); i++) {
+			Projectile p = (Projectile) projectiles.get(i);
+			g.setColor(Color.YELLOW);
+			g.fillRect(p.getX(), p.getY(), 5, 10);
+		}
+		
 		g.drawImage(hero, plane.getCenterX() - 40, plane.getCenterY() - 59,
 				this);
 	}
@@ -120,7 +142,8 @@ public class Driver extends Applet implements Runnable, KeyListener {
 			plane.setMovingRight(true);
 			break;
 
-		case KeyEvent.VK_SPACE:
+		case KeyEvent.VK_CONTROL:
+			plane.shoot();
 			break;
 		}
 

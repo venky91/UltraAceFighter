@@ -1,8 +1,11 @@
 package ultracefighter;
 
+import java.util.ArrayList;
+
+
 public class Plane {
 	
-	final int MOVESPEED = 5;
+	final int MOVESPEED = 6;
 
 	private int centerX = 400;
 	private int centerY = 482;
@@ -14,6 +17,8 @@ public class Plane {
     private boolean movingRight = false;
     private boolean movingUp = false;
     private boolean movingDown = false;
+    
+    private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	
 	public void update() {
 		
@@ -98,6 +103,11 @@ public class Plane {
 		}
 	}
 	
+	public void shoot() {
+		Projectile p = new Projectile(centerX - 3, centerY -70);
+		projectiles.add(p);
+	}
+	
 	
 	// Getters and Setters
 	public int getCenterX() {
@@ -150,6 +160,12 @@ public class Plane {
 	}
 	public void setMovingDown(boolean movingDown) {
 		this.movingDown = movingDown;
+	}
+	public ArrayList<Projectile> getProjectiles() {
+		return projectiles;
+	}
+	public void setProjectiles(ArrayList<Projectile> projectiles) {
+		this.projectiles = projectiles;
 	}
 	
 	
