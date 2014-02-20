@@ -1,11 +1,14 @@
 package ultracefighter;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 
 public class Plane {
 	
 	final int MOVESPEED = 6;
+	private int health = 1000;
+	private int lives = 3;
 
 	private int centerX = 400;
 	private int centerY = 482;
@@ -19,6 +22,9 @@ public class Plane {
     private boolean movingDown = false;
     
     private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+    public static Rectangle rect = new Rectangle(0, 0, 0, 0);
+    public static Rectangle rect2 = new Rectangle(0, 0, 0, 0);
+    public static Rectangle rect3 = new Rectangle(0,0,0,0);
 	
 	public void update() {
 		
@@ -40,6 +46,10 @@ public class Plane {
 		if (centerY <= 58) {
 			centerY = 59;
 		}
+		
+		rect.setRect(centerX - 40, centerY , 30, 30);
+		rect2.setRect(centerX + 10, centerY, 30, 30);
+		rect3.setRect(centerX - 16, centerY - 60, 30, 50);
 	
 	}
 	
@@ -108,6 +118,14 @@ public class Plane {
 		projectiles.add(p);
 	}
 	
+	public boolean checkCollision(Rectangle r) {
+		
+		if (rect.intersects(r) || rect2.intersects(r) || rect3.intersects(r)) {
+			return true;
+		}
+		return false;
+	}
+	
 	
 	// Getters and Setters
 	public int getCenterX() {
@@ -166,6 +184,21 @@ public class Plane {
 	}
 	public void setProjectiles(ArrayList<Projectile> projectiles) {
 		this.projectiles = projectiles;
+	}
+	public void setHealth(int health) {
+		this.health = health;
+	}
+	public int getHealth() {
+		return health;
+	}
+	public int getLives() {
+		return lives;
+	}
+	public void setLives(int lives) {
+		this.lives = lives;
+	}
+	public void removeLife() {
+		lives -= 1;
 	}
 	
 	
